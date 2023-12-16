@@ -1,0 +1,27 @@
+---
+
+- name: Dockutil | Check if app is already installed
+  ansible.builtin.command: dockutil -V
+  register: dockutil_version_output
+  ignore_errors: true
+  changed_when: false
+  tags:
+    - dock-install
+
+- name: Dockutil | Should we install
+  ansible.builtin.set_fact:
+    dockutil_not_found: "{{ dockutil_version_output.rc > 0 }}"
+  tags:
+    - dock-install
+
+- name: Dockutil | Install for macOS using brew
+  community.general.homebrew:
+    name: "{{ dock_dockutil_tap }}"
+    state: present
+    update_homebrew: true
+    path: "/usr/local/bin:/usr/local/sbin:/opt/homebrew/bin"
+  when: dockutil_not_found
+  tags:
+    - dock-install
+
+...

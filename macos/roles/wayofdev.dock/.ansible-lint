@@ -1,0 +1,16 @@
+---
+
+# https://ansible-lint.readthedocs.io/en/latest/configuring/
+
+skip_list:
+  - no-handler
+  - experimental
+  - command-instead-of-shell
+  - risky-shell-pipe
+  - line-length
+
+exclude_paths:
+  - ./contrib
+  - ./.venv
+
+...

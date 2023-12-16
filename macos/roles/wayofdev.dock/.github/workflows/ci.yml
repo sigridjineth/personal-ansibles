@@ -1,0 +1,112 @@
+---
+
+name: ci
+
+on:  # yamllint disable-line rule:truthy
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+    inputs:
+      shouldPublish:
+        description: 'Should publish role to Ansible Galaxy? (yes/no)'
+        required: false
+        default: 'no'
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase
+        uses: actions/checkout@v3
+
+      - name: Setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install poetry into system
+        uses: gi0baro/setup-poetry-bin@v1
+        with:
+          virtualenvs-in-project: true
+
+      - name: Load cached .venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}-${{ hashFiles('**/requirements.yml') }}
+
+      - name: Install dependencies
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: make install-deps
+
+      - name: Run linting tasks
+        run: make lint
+
+  integration-macos-molecule:
+    name: Integration on macOS
+    runs-on: ${{ matrix.os }}
+    strategy:
+      max-parallel: 4
+      matrix:
+        os: ["macos-12"]
+        scenario: ["defaults-restored-on-localhost"]
+
+    steps:
+      - name: Check out the codebase
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Check out the actions/cache source
+        uses: actions/checkout@v3
+        with:
+          repository: actions/cache
+          ref: v3
+          path: .tmp/actions/cache
+
+      - name: Check out fix - make actions/cache@v3 run always, not only when job succeeds
+        run: |
+          sed -i -e '/ post-if: /d' .tmp/actions/cache/action.yml
+
+      - name: Install poetry into system
+        uses: gi0baro/setup-poetry-bin@v1
+        with:
+          virtualenvs-in-project: true
+
+      - name: Load cached .venv
+        id: cached-poetry-dependencies
+        uses: ./.tmp/actions/cache
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}-${{ hashFiles('**/requirements.yml') }}
+
+      - name: Install dependencies
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: make install-deps
+
+      - name: Test the playbook with molecule
+        run: poetry run molecule test --scenario-name "${SCENARIO}" -- -v
+        env:
+          SCENARIO: ${{ matrix.scenario }}
+          PY_COLORS: '1'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish:
+    if: github.event.inputs.shouldPublish == 'yes' || github.ref == 'refs/heads/master'
+    needs:
+      - lint
+      - integration-macos-molecule
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish to Ansible Galaxy
+        uses: robertdebock/galaxy-action@1.2.1
+        with:
+          galaxy_api_key: ${{ secrets.GALAXY_API_KEY }}
+
+...

@@ -1,0 +1,30 @@
+---
+
+- name: Dockutil | Get information on items to add
+  ansible.builtin.shell: "{{ dock_dockutil_path }} -f '{{ item.label }}'"
+  register: to_add
+  loop: "{{ dock_dockitems | selectattr('action', 'equalto', 'add') }}"
+  changed_when: false
+  failed_when: >
+    "No such file or directory" in to_add.stdout
+    or "command not found" in to_add.stdout
+  tags:
+    - dock-add
+
+- name: Dockutil | Filter out already added items
+  ansible.builtin.set_fact:
+    dock_dockitems_to_add: "{{ dock_dockitems_to_add | default([]) + [item] }}"
+  loop: "{{ to_add.results | rejectattr('stdout', 'search', 'was found in') }}"
+  tags:
+    - dock-add
+
+- name: Dockutil | Adding items
+  ansible.builtin.shell: "{{ lookup('template', './templates/add.j2') | replace('\n', '') | trim }}"
+  loop_control:
+    label: "{{ item.item }}"
+  changed_when: false
+  when: dock_dockitems_to_add is defined and (dock_dockitems_to_add | length > 0)
+  tags:
+    - dock-add
+
+...

@@ -1,22 +1,25 @@
 configure_dotfiles: false
 configure_dock: true
+# dock_dockutil_install: true
+# dock_dockutil_tap: lotyp/formulae/dockutil
+dock_dockitems_erase_all: true
 
-dockitems_remove:
-  - Launchpad
-  - Messages
-  - Mail
-  - Maps
-  - Photos
-  - FaceTime
-  - Calendar
-  - Contacts
-  - Freeform
-  - TV
-  - Podcasts
-  - 'App Store'
-  - Music
-  - Numbers
-  - Pages
+# dockitems_remove:
+#   - Launchpad
+#   - Messages
+#   - Mail
+#   - Maps
+#   - Photos
+#   - FaceTime
+#   - Calendar
+#   - Contacts
+#   - Freeform
+#   - TV
+#   - Podcasts
+#   - 'App Store'
+#   - Music
+#   - Numbers
+#   - Pages
 
 dockitems_persist: []
 
@@ -41,6 +44,8 @@ homebrew_installed_packages:
   - google-cloud-sdk
   - llm
   - poe
+  - zsh-history-substring-search
+  - zsh-syntax-highlighting
 
 homebrew_taps:
   - homebrew/core
@@ -81,6 +86,7 @@ homebrew_cask_apps:
   - figma
   - 1password-cli
   - iterm2
+  - hpedrorodrigues/tools/dockutil # https://github.com/geerlingguy/mac-dev-playbook/issues/153
 
 npm_packages:
   - prettier

@@ -1,0 +1,48 @@
+---
+
+- name: Dockutil | Include | General validation tasks
+  ansible.builtin.include_tasks: validate-all.yml
+  loop: "{{ items_to_validate | flatten(levels=1) }}"
+  loop_control:
+    loop_var: item_to_validate
+  tags:
+    - dock-manipulate
+    - dock-validate
+    - dock-add
+    - dock-remove
+    - dock-move
+
+- name: Dockutil | Include | Other validation tasks
+  ansible.builtin.include_tasks: validate-pos.yml
+  tags:
+    - dock-manipulate
+    - dock-validate
+    - dock-add
+    - dock-remove
+    - dock-move
+
+- name: Dockutil | Include | Install dockutil
+  ansible.builtin.include_tasks: install.yml
+  when: dock_dockutil_install | bool
+  tags:
+    - dock-install
+
+- name: Dockutil | Include | Remove items
+  ansible.builtin.include_tasks: remove.yml
+  tags:
+    - dock-manipulate
+    - dock-remove
+
+- name: Dockutil | Include | Add items
+  ansible.builtin.include_tasks: add.yml
+  tags:
+    - dock-manipulate
+    - dock-add
+
+- name: Dockutil | Include | Move items
+  ansible.builtin.include_tasks: move.yml
+  tags:
+    - dock-manipulate
+    - dock-move
+
+...

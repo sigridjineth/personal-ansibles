@@ -12,22 +12,19 @@
   #     tags: ['always']
 
   roles:
-    # - role: elliotweiser.osx-command-line-tools
-    # - role: geerlingguy.mac.homebrew
-    #   tags: ['always']
-    # - role: geerlingguy.dotfiles
-      # when: configure_dotfiles
-      # tags: ['always']
-    # - role: geerlingguy.mac.dock
-    #   # when: configure_dock
-    #   tags: ['always']
+    - role: elliotweiser.osx-command-line-tools
+    - role: geerlingguy.mac.homebrew
+      tags: ['homebrew']
+    - role: wayofdev.dock
+      when: configure_dock
+      tags: ['dock']
 
   tasks:
-    # - import_tasks: tasks/zsh.yml
-    #   tags: ['always']
-    # - import_tasks: tasks/nvm.yml
-    #   tags: ['always']
+    - import_tasks: tasks/zsh.yml
+      tags: ['zsh']
+    - import_tasks: tasks/nvm.yml
+      tags: ['macos']
     - import_tasks: tasks/macos.yml
-      tags: ['always']
+      tags: ['macos']
     - import_tasks: tasks/npm-packages.yml
-      tags: ['always']
+      tags: ['macos']

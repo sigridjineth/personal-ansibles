@@ -11,9 +11,32 @@
   register: oh_my_zsh_installed
 
 - name: Install Oh My Zsh
-  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
+  shell: curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh -s -- --unattended
   when: not oh_my_zsh_installed.stat.exists
+  become: true
 
 - name: Install zsh-autosuggestions
   community.general.homebrew:
     name: zsh-autosuggestions
+
+- name: Set Agnoster theme in .zshrc
+  ansible.builtin.lineinfile:
+    path: "/Users/sigridjineth/.zshrc"
+    regexp: '^ZSH_THEME=.*'
+    line: 'ZSH_THEME="agnoster"'
+
+- name: Add custom prompt_context function to .zshrc
+  ansible.builtin.blockinfile:
+    path: "/Users/sigridjineth/.zshrc"
+    block: |
+      prompt_context() {
+        # Custom (Random emoji)
+        emojis=("🐿H" "🤍" "💛" "🐰" "🐥" "🦋" "🌈" "🍻" "🚀" "🍒" "🌙")
+        RAND_EMOJI_N=$(( $RANDOM % {% raw %}${#emojis[@]}{% endraw %} + 1))
+        prompt_segment black default "Sigrid {% raw %}${emojis[$RAND_EMOJI_N]}{% endraw %} "
+      }
+
+- name: Add python alias to .zshrc
+  ansible.builtin.lineinfile:
+    path: "/Users/sigridjineth/.zshrc"
+    line: "alias python=python3"
