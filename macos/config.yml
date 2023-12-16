@@ -1,0 +1,89 @@
+configure_dotfiles: false
+configure_dock: true
+
+dockitems_remove:
+  - Launchpad
+  - Messages
+  - Mail
+  - Maps
+  - Photos
+  - FaceTime
+  - Calendar
+  - Contacts
+  - Freeform
+  - TV
+  - Podcasts
+  - 'App Store'
+  - Music
+  - Numbers
+  - Pages
+
+dockitems_persist: []
+
+homebrew_installed_packages:
+  - bat # cat with syntax highlighting
+  - blackhole-2ch # Record screen with internal audio
+  - bun
+  - ffmpeg
+  - gh
+  - git
+  - jq
+  - fnm
+  - openssl
+  - pnpm
+  - rust
+  - ssh-copy-id
+  - unzip
+  - wget
+  - yt-dlp # Youtube CLI downloader
+  - go
+  - python@3.11
+  - google-cloud-sdk
+  - llm
+  - poe
+
+homebrew_taps:
+  - homebrew/core
+  - homebrew/cask
+  - homebrew/cask-fonts
+  - oven-sh/bun
+
+homebrew_cask_appdir: /Applications
+homebrew_cask_apps:
+  - 1password
+  - arc
+  - bettertouchtool
+  - calibre
+  - discord
+  - docker
+  - firefox
+  - font-fira-code
+  - google-chrome
+  - karabiner-elements
+  - keyboard-maestro
+  - notion
+  - obs
+  - obsidian
+  - postman
+  - raycast
+  - setapp
+  - slack
+  - spotify
+  - visual-studio-code
+  - vlc
+  - warp
+  - webstorm
+  - zoom
+  - intellij-idea
+  - pycharm
+  - goland
+  - datagrip
+  - figma
+  - 1password-cli
+  - iterm2
+
+npm_packages:
+  - prettier
+  - eslint
+  - typescript
+  - ts-node

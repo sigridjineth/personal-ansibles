@@ -1,0 +1,16 @@
+- name: Install NVM (Node Version Manager)
+  shell: >
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+  args:
+    executable: /bin/bash
+  environment:
+    HOME: "{{ ansible_env.HOME }}"
+  changed_when: false
+
+- name: Source NVM in shell
+  shell: ". {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm install node"
+  args:
+    executable: /bin/bash
+  environment:
+    HOME: "{{ ansible_env.HOME }}"
+  changed_when: false

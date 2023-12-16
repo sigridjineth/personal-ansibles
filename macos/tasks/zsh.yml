@@ -1,0 +1,19 @@
+# macOs Ventura has ZSH already set as default shell, so the commented steps below are not needed.
+# - name: Install ZSH
+#   community.general.homebrew:
+#     name: zsh
+# - name: Change shell to zsh
+#   shell: chsh -s $(which zsh)
+
+- name: Check if Oh My Zsh is already installed
+  stat:
+    path: "/Users/sigridjineth/.oh-my-zsh"
+  register: oh_my_zsh_installed
+
+- name: Install Oh My Zsh
+  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
+  when: not oh_my_zsh_installed.stat.exists
+
+- name: Install zsh-autosuggestions
+  community.general.homebrew:
+    name: zsh-autosuggestions
