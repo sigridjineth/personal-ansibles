@@ -280,11 +280,25 @@ osascript -e 'tell application "System Events" to tell every desktop to set pict
 # Scroll direction: Unnatural (content tracks finger movement)
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 
-# Enable secondary click (right-click) on bottom right corner
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
+echo -e "- Trackpad, mouse, keyboard, Bluetooth accessories, and input …"
+
+# Trackpad: enable tap to click for this user and for the login screen
+# https://github.com/bramus/freshinstall/blob/master/steps/1.macos-settings.sh
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
+# Trackpad: enable right click with two fingers
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
+defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -bool true
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -bool true
+
+# Function to set the default web browser which is not working at the moment
+# https://github.com/raycast/script-commands/blob/master/commands/system/default-browser-front-most-app.applescript
+# https://www.felixparadis.com/posts/how-to-set-the-default-browser-from-the-command-line-on-a-mac/
+
 
 # Reset Launchpad, but keep the desktop wallpaper intact
 # find "${HOME}/Library/Application Support/Dock" -name "*-*.db" -maxdepth 1 -delete

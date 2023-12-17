@@ -85,6 +85,8 @@ ansible-galaxy install -r requirements.yml
 ```shell
 # Enter your password when prompted
 ansible-playbook main.yml --ask-become-pass
+
+ansible-playbook main.yml --ask-pass --ask-become-pass --tags="macos"
 ```
 
 ## Post installation step by steps instructions

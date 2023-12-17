@@ -23,8 +23,10 @@
     - import_tasks: tasks/zsh.yml
       tags: ['zsh']
     - import_tasks: tasks/nvm.yml
-      tags: ['macos']
+      tags: ['macos', 'nvm']
+    - import_tasks: tasks/npm-packages.yml
+      tags: ['macos', 'npm']
     - import_tasks: tasks/macos.yml
       tags: ['macos']
-    - import_tasks: tasks/npm-packages.yml
-      tags: ['macos']
+    - import_tasks: tasks/homebrew.yml
+      tags: ['macos', 'homebrew']

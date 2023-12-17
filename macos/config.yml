@@ -24,6 +24,7 @@ dock_dockitems_erase_all: true
 dockitems_persist: []
 
 homebrew_installed_packages:
+  - ansible
   - bat # cat with syntax highlighting
   - blackhole-2ch # Record screen with internal audio
   - bun
@@ -46,6 +47,9 @@ homebrew_installed_packages:
   - poe
   - zsh-history-substring-search
   - zsh-syntax-highlighting
+  - tmux
+  - kubernetes-cli
+  - kubernetes-helm
 
 homebrew_taps:
   - homebrew/core
