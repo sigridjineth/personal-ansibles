@@ -50,6 +50,7 @@ homebrew_installed_packages:
   - tmux
   - kubernetes-cli
   - kubernetes-helm
+  - pipx
 
 homebrew_taps:
   - homebrew/core
@@ -97,3 +98,6 @@ npm_packages:
   - eslint
   - typescript
   - ts-node
+
+pip_packages:
+  - poetry
