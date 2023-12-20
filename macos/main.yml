@@ -32,3 +32,5 @@
       tags: ['macos']
     - import_tasks: tasks/homebrew.yml
       tags: ['macos', 'homebrew']
+    - import_tasks: tasks/docker.yml
+      tags: ['macos', 'docker']

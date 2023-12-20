@@ -1,0 +1,4 @@
+- name: Pull PostgreSQL Docker image
+  community.general.docker_image:
+    name: postgres
+    source: pull

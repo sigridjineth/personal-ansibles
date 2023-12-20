@@ -50,7 +50,7 @@ homebrew_installed_packages:
   - tmux
   - kubernetes-cli
   - kubernetes-helm
-  - pipx
+  - python-requests
 
 homebrew_taps:
   - homebrew/core
@@ -101,3 +101,4 @@ npm_packages:
 
 pip_packages:
   - poetry
+  - requests
