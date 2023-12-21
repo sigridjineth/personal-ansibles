@@ -98,6 +98,8 @@ npm_packages:
   - eslint
   - typescript
   - ts-node
+  - yarn
+  - pnpm
 
 pip_packages:
   - poetry
