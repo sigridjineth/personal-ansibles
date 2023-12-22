@@ -92,6 +92,7 @@ homebrew_cask_apps:
   - 1password-cli
   - iterm2
   - hpedrorodrigues/tools/dockutil # https://github.com/geerlingguy/mac-dev-playbook/issues/153
+  - tunnelblick
 
 npm_packages:
   - prettier
