@@ -93,6 +93,7 @@ homebrew_cask_apps:
   - iterm2
   - hpedrorodrigues/tools/dockutil # https://github.com/geerlingguy/mac-dev-playbook/issues/153
   - tunnelblick
+  - clion
 
 npm_packages:
   - prettier
