@@ -51,6 +51,7 @@ homebrew_installed_packages:
   - kubernetes-cli
   - kubernetes-helm
   - python-requests
+  - jupyter
 
 homebrew_taps:
   - homebrew/core
@@ -106,3 +107,4 @@ npm_packages:
 pip_packages:
   - poetry
   - requests
+  - notebook
