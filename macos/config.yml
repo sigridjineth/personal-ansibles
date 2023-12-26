@@ -52,6 +52,7 @@ homebrew_installed_packages:
   - kubernetes-helm
   - python-requests
   - jupyter
+  # arch -arm64 brew install postgresql
 
 homebrew_taps:
   - homebrew/core
