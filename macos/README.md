@@ -142,3 +142,5 @@ ansible-playbook main.yml --ask-pass --ask-become-pass --tags="macos"
 
 - Migration Assistant - maybe it could be useful when I'll be migrating my personal laptop, because when I tried to use
   it for the one for my company, I couldn't transfer System Settings, because they're managed by admins.
+- Install Ampetime
+- pipx, requests, else ...

@@ -50,6 +50,9 @@ homebrew_installed_packages:
   - tmux
   - kubernetes-cli
   - kubernetes-helm
+  - python-requests
+  - jupyter
+  # arch -arm64 brew install postgresql
 
 homebrew_taps:
   - homebrew/core
@@ -91,9 +94,18 @@ homebrew_cask_apps:
   - 1password-cli
   - iterm2
   - hpedrorodrigues/tools/dockutil # https://github.com/geerlingguy/mac-dev-playbook/issues/153
+  - tunnelblick
+  - clion
 
 npm_packages:
   - prettier
   - eslint
   - typescript
   - ts-node
+  - yarn
+  - pnpm
+
+pip_packages:
+  - poetry
+  - requests
+  - notebook

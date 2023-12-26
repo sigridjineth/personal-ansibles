@@ -26,7 +26,11 @@
       tags: ['macos', 'nvm']
     - import_tasks: tasks/npm-packages.yml
       tags: ['macos', 'npm']
+    - import_tasks: tasks/pip-packages.yml
+      tags: ['macos', 'pip']
     - import_tasks: tasks/macos.yml
       tags: ['macos']
     - import_tasks: tasks/homebrew.yml
       tags: ['macos', 'homebrew']
+    - import_tasks: tasks/docker.yml
+      tags: ['macos', 'docker']
